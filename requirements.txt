@@ -1,0 +1,9 @@
+python==3.7
+torch
+pandas
+scikit-learn
+packaging
+urllib3==1.26.6
+importlib-metadata
+sentence_transformers
+apex # git clone https://github.com/NVIDIA/apex.git; python setup.py install

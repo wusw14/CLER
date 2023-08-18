@@ -17,7 +17,7 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--path", type=str, default="../data4/")
+    parser.add_argument("--path", type=str, default="../data/")
     parser.add_argument("--dataset", type=str, default="wdc/shoes")
     parser.add_argument("--run_id", type=int, default=0)
     parser.add_argument("--batch_size", type=int, default=64)
@@ -57,17 +57,16 @@ if __name__=="__main__":
         'WA': 'Walmart-Amazon',\
         'AB': 'Abt-Buy',
         'M': 'monitor',
-        'C': 'camera3'
     }
     dataset = dataset_dict.get(dataset, dataset)
 
     if 'wdc' in dataset:
-        hp.path = "../data4"
+        hp.path = "../data"
     elif 'camera' in dataset or 'monitor' in dataset:
-        hp.path = '../data4/Alaska'
+        hp.path = '../data/Alaska'
         hp.dataset = dataset
     else:
-        hp.path = "../data4/ER-Magellan"
+        hp.path = "../data/ER-Magellan"
         if 'Abt' in dataset:
             hp.dataset = os.path.join("Textual", dataset)
         else:
@@ -81,8 +80,4 @@ if __name__=="__main__":
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)
     
-    # topkA, distA, topkB, distB, distAll = get_topK_sim(hp)
-    # candidates_dict = filter_test(topkA, hp)
-    # candidates_dict = filter_by_rule(candidates_dict, hp)
-    # candidates_dict = load_candidates_from_train(os.path.join(hp.path, hp.dataset, 'train_'+hp.blocker_type+'.csv'))
     train(hp)
