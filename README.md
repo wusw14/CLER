@@ -91,6 +91,12 @@ python -u test_magellan.py --fp16 --total_budget <annotation budget> --gpu <gpu 
 e.g., python -u test_magellan.py --fp16 --total_budget 500 --gpu 0 --dataset FZ --topK 10 --run_id 0
 ```
 
+## Contact Information
+If you have any questions or feedback about this project, please feel free to contact us. We highly appreciate your suggestions!
+
+Email: swubs@connect.ust.hk
+GitHub Issues: For more technical inquiries, you can also create a new issue in our GitHub repository.
+We will respond to all questions as soon as possible.
 
 ## Acknowledgements
 This repository is developed based on https://github.com/megagonlabs/ditto 
