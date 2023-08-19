@@ -56,12 +56,14 @@ The datasets used in this work can be downloaded from this [link](https://drive.
 
 
 ## Training and Evaluation
-Run the run.py (including train.py and test_dynamic.py) for training the model and evaluating the overall performance on the test set with five different random seeds.  
-run.py only requires the dataset name, gpu id and annotation budget; all other hyperparamters are set to the values we used in our experiments.
+To reproduce the overall performance of our CLER method, run the run.py (including train.py and test_dynamic.py) for training the model and evaluating the overall performance on the test set with five different random seeds.  
+run.py only requires the dataset name, gpu id and annotation budget; all other hyperparamters are set to the values we used in our experiments.  
+In our experiments, the budgets are in [500, 1000, 1500, 2000].    
 ```
 python run.py <dataset> <gpu id> <annotation budget>  
 
-e.g., python run.py FZ 0 500
+# For example, to obtain the overall performance of the Fodors-Zagats (FZ) dataset under the annotation budget 500, excute the following command:
+python run.py FZ 0 500
 ```
 
 ### Training
@@ -69,7 +71,8 @@ If you only want to conduct the training process, you can conduct the following 
 ```
 python -u train.py --fp16 --lr <learning_rate> --total_budget <annotation budget> --gpu <gpu id> --dataset <dataset> --run_id <random_seed> --batch_size <batch_size> --save_model --topK <K, the number of most similar entries retrieved for each left entry during the training>  
 
-e.g., python -u train.py --fp16 --lr 1e-5 --total_budget 500 --gpu 0 --dataset FZ --run_id 0 --batch_size 64 --save_model --topK 10  
+# For example, training the blocker and the matcher on the FZ dataset under annotation budget = 500 and random seed = 0.
+python -u train.py --fp16 --lr 1e-5 --total_budget 500 --gpu 0 --dataset FZ --run_id 0 --batch_size 64 --save_model --topK 10  
 ```
 
 ### Evaluation
@@ -77,7 +80,8 @@ To evaluate the overall performance of the ER model, including the blocking and 
 ``` 
 python -u test_dynamic.py --fp16 --total_budget <annotation_budget> --gpu <gpu id> --dataset <dataset> --topK <K> --run_id <random_seed>
 
-e.g., python -u test_dynamic.py --fp16 --total_budget 500 --gpu 0 --dataset FZ --topK 10 --run_id 0
+# For example, given the trained blocker and the matcher, evaluate the overall performance by dynamic inference strategy on the FZ dataset under annotation budget = 500 and random seed = 0.
+python -u test_dynamic.py --fp16 --total_budget 500 --gpu 0 --dataset FZ --topK 10 --run_id 0
 ```
 
 To evaluate the blocker
@@ -86,14 +90,16 @@ To evaluate the blocker
 
 python -u eval_blocker.py --dataset <dataset> --topK <K, the same hyperparamter as used in the training> --total_budget <annotation budget> --run_id <random_seed>
 
-e.g., python -u eval_blocker.py --dataset FZ --topK 10 --total_budget 500 --run_id 0
+# For example, evaluate the trained blocker on the FZ dataset under annotation budget = 500 and random seed = 0.
+python -u eval_blocker.py --dataset FZ --topK 10 --total_budget 500 --run_id 0
 ```
 
-To evaluate the matcher on the processed megallan dataset
+To evaluate the matcher on the processed megallan dataset (excluding the impact of the blocker)
 ```
 python -u test_magellan.py --fp16 --total_budget <annotation budget> --gpu <gpu id> --dataset <dataset> --topK <K, the same hyperparamter as used in the training> --run_id <random_seed>
 
-e.g., python -u test_magellan.py --fp16 --total_budget 500 --gpu 0 --dataset FZ --topK 10 --run_id 0
+# For example, evaluate the trained matcher on the processed Magellan FZ dataset under annotation budget = 500 and random seed = 0.
+python -u test_magellan.py --fp16 --total_budget 500 --gpu 0 --dataset FZ --topK 10 --run_id 0
 ```
 
 ## Contact Information
