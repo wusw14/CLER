@@ -9,7 +9,7 @@ signals. To mitigate the impact of noise in pseudo labels, we develop
 optimization techniques from three aspects: label generation, label
 selection and model training.
 
-![avatar](figs/CLER.png)
+![Image text](https://github.com/wusw14/CLER/blob/master/figs/CLER.png)
 Figure (a) Illustration of the Co-learning between the blocker and the matcher in terms of information breadth and prediction accuracy. The blocker learns from the matcher's precise classification ability while the matcher learns from the blocker's global view of the similarity ranking. The gray arrows represent the data flow.
 (b) The overview of our CLER framework in one training iteration, containing three steps (1) Data Annotation: The blocker (BK) first produces a candidate set $C$ from all pairs of entities $(e, e')$ where $e\in D$ and $e' \in D'$. The matcher (MC) then generates scores for each candidate, which are used to select informative examples to be annotated.
 (2) Pseudo-labeling: The blocker and the matcher generate pseudo labels for $C$ separately. The generated ones are further processed into two sets feeding the blocker and the matcher, respectively.
