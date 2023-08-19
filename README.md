@@ -17,7 +17,6 @@ Figure (a) Illustration of the Co-learning between the blocker and the matcher i
 
 ## Requirements
 The implementation requires python 3.7. All the packages except apex could be installed via "pip intall <package_name>".  
-For apex, we recommend to install via this command "git clone https://github.com/NVIDIA/apex.git; python setup.py install".
 ```
 python==3.7   
 torch   
@@ -29,6 +28,12 @@ importlib-metadata
 sentence_transformers 
 transformers  
 apex
+```
+
+For apex, we recommend to install via this command "".
+```
+git clone https://github.com/NVIDIA/apex.git 
+python setup.py install
 ```
 
 
