@@ -30,7 +30,7 @@ transformers
 apex
 ```
 
-For apex, we recommend to install via this command "".
+For apex, we recommend to install via the following way:
 ```
 git clone https://github.com/NVIDIA/apex.git 
 python setup.py install
