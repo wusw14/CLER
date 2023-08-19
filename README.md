@@ -1,13 +1,6 @@
 # Blocker and Matcher Can Mutually Benefit: A Co-Learning Framework for Low-Resource Entity Resolution
 
-CLER is an end-to-end iterative Co-learning framework for ER,
-aimed at jointly training the blocker and the matcher by leveraging
-their cooperative relationship. In particular, we let the blocker and
-the matcher share their learned knowledge with each other via
-iteratively updated pseudo labels, which broaden the supervision
-signals. To mitigate the impact of noise in pseudo labels, we develop
-optimization techniques from three aspects: label generation, label
-selection and model training.
+CLER is an end-to-end iterative Co-learning framework for ER, aimed at jointly training the blocker and the matcher by leveraging their cooperative relationship. 
 
 ![Image text](https://github.com/wusw14/CLER/blob/master/figs/CLER.png)
 Figure (a) Illustration of the Co-learning between the blocker and the matcher in terms of information breadth and prediction accuracy. The blocker learns from the matcher's precise classification ability while the matcher learns from the blocker's global view of the similarity ranking. The gray arrows represent the data flow.
@@ -16,9 +9,15 @@ Figure (a) Illustration of the Co-learning between the blocker and the matcher i
 (3) Training: Both the annotated data $S_{annot}$ and the pseudo-labeled data are utilized for training the blocker and the matcher.
 
 ## Requirements
-The implementation requires python 3.7. All the packages except apex could be installed via "pip intall <package_name>".  
+### Create conda environment and install packages
+The implementation requires python 3.7.  
 ```
-python==3.7   
+conda create -n cler python==3.7
+conda activate cler
+``` 
+
+All the packages except apex could be installed via "pip intall <package_name>".  
+```  
 torch   
 pandas   
 scikit-learn   
@@ -36,11 +35,14 @@ git clone https://github.com/NVIDIA/apex.git
 python setup.py install
 ```
 
+### Hardware environment
+Intel(R) Xeon(R) Gold 6248R CPU @ 3.00GHz  
+NVIDIA A100 80GB  
+Note: the experiments do not require the same hardware environment.
 
 ## Datasets
 we conduct experiments on seven widely adopted public datasets from various domains for ER tasks. 
 These datasets are obtained from the Magellan data repository and the Alaska benchmark. 
-A summary of the dataset statistics can be found in Table 1.
     
 | Dataset  | \# entries $D,D'$ | \# matches | (%) matches 
 | :----: | :----: | :----: | :----: |
