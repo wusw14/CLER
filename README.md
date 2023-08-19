@@ -37,7 +37,7 @@ we conduct experiments on seven widely adopted public datasets from various doma
 These datasets are obtained from the Magellan data repository and the Alaska benchmark. 
 A summary of the dataset statistics can be found in Table 1.
     
-| Dataset  | \# entries $D$,$D'$ | \# matches | (%) matches 
+| Dataset  | \# entries $D,D'$ | \# matches | (%) matches 
 | :----: | :----: | :----: | :----: |
 | Amazon-Google (AG) | 1363, 3226 | 1300 | 0.0296 
 | DBLP-ACM (DA) | 2616, 2294 | 2224 | 0.0371 
