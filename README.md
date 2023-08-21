@@ -145,5 +145,7 @@ Our implementation of baselines is based on these public repositories:
 * [CollaborEM](https://github.com/ZJU-DAILY/CollaborEM)
 * [DITTO](https://github.com/megagonlabs/ditto)
 * [Avanika, et al.](https://github.com/HazyResearch/fm_data_tasks) 
+* [DeepBlock](https://github.com/qcri/DeepBlocker)
+* [Sudowoodo](https://github.com/megagonlabs/sudowoodo)
 
 Thanks for the authors' great contributions!
