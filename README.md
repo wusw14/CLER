@@ -1,12 +1,12 @@
 # Blocker and Matcher Can Mutually Benefit: A Co-Learning Framework for Low-Resource Entity Resolution
 
-CLER is an end-to-end iterative Co-learning framework for ER, aimed at jointly training the blocker and the matcher by leveraging their cooperative relationship. 
+This is the source code of CLER. CLER is an end-to-end iterative Co-learning framework for ER, aimed at jointly training the blocker and the matcher by leveraging their cooperative relationship.
+
+Our paper is submitted to VLDB 2024. 
 
 ![Image text](https://github.com/wusw14/CLER/blob/master/figs/CLER.png)
-Figure (a) Illustration of the Co-learning between the blocker and the matcher in terms of information breadth and prediction accuracy. The blocker learns from the matcher's precise classification ability while the matcher learns from the blocker's global view of the similarity ranking. The gray arrows represent the data flow.
-(b) The overview of our CLER framework in one training iteration, containing three steps (1) Data Annotation: The blocker (BK) first produces a candidate set $C$ from all pairs of entities $(e, e')$ where $e\in D$ and $e' \in D'$. The matcher (MC) then generates scores for each candidate, which are used to select informative examples to be annotated.
-(2) Pseudo-labeling: The blocker and the matcher generate pseudo labels for $C$ separately. The generated ones are further processed into two sets feeding the blocker and the matcher, respectively.
-(3) Training: Both the annotated data $S_{annot}$ and the pseudo-labeled data are utilized for training the blocker and the matcher.
+Figure (a) Illustration of the Co-learning between the blocker and the matcher in terms of information breadth and prediction accuracy. (b) The overview of our CLER framework in one training iteration, containing three steps (1) Data Annotation (2) Pseudo-labeling (3) Training.
+
 
 ## Requirements
 ### Create conda environment and install packages
@@ -71,16 +71,35 @@ python run.py FZ 0 500
 ### Training
 If you only want to conduct the training process, you can conduct the following command. In this way, the trained blocker and matcher would be saved and could be used for further evaluation.
 ```
-python -u train.py --fp16 --lr <learning_rate> --total_budget <annotation budget> --gpu <gpu id> --dataset <dataset> --run_id <random_seed> --batch_size <batch_size> --save_model --topK <K, the number of most similar entries retrieved for each left entry during the training>  
+python -u train.py --fp16 --save_model \
+                   --lr <learning_rate> \
+                   --total_budget <annotation budget> \
+                   --gpu <gpu id> \
+                   --dataset <dataset> \
+                   --run_id <random_seed> \
+                   --batch_size <batch_size> \
+                   --topK <K, the number of most similar entries retrieved for each left entry during the training>  
 
 # For example, training the blocker and the matcher on the FZ dataset under annotation budget = 500 and random seed = 0.
-python -u train.py --fp16 --lr 1e-5 --total_budget 500 --gpu 0 --dataset FZ --run_id 0 --batch_size 64 --save_model --topK 10  
+python -u train.py --fp16 --save_model \
+                   --lr 1e-5 \
+                   --total_budget 500 \
+                   --gpu 0 \
+                   --dataset FZ \
+                   --run_id 0 \
+                   --batch_size 64 \
+                   --topK 10  
 ```
 
 ### Evaluation
 To evaluate the overall performance of the ER model, including the blocking and the matching steps
 ``` 
-python -u test_dynamic.py --fp16 --total_budget <annotation_budget> --gpu <gpu id> --dataset <dataset> --topK <K> --run_id <random_seed>
+python -u test_dynamic.py --fp16 \
+                          --total_budget <annotation_budget> \
+                          --gpu <gpu id> \
+                          --dataset <dataset> \
+                          --topK <K, the same hyperparamter as used in the training> \
+                          --run_id <random_seed>
 
 # For example, given the trained blocker and the matcher, evaluate the overall performance by dynamic inference strategy on the FZ dataset under annotation budget = 500 and random seed = 0.
 python -u test_dynamic.py --fp16 --total_budget 500 --gpu 0 --dataset FZ --topK 10 --run_id 0
@@ -90,7 +109,10 @@ To evaluate the blocker
 ```
 # the output would be the recall values corresponding to retrieve [1,2,5,10,20,50] entries for each entry in the test set
 
-python -u eval_blocker.py --dataset <dataset> --topK <K, the same hyperparamter as used in the training> --total_budget <annotation budget> --run_id <random_seed>
+python -u eval_blocker.py --dataset <dataset> \
+                          --topK <K, the same hyperparamter as used in the training> \
+                          --total_budget <annotation budget> \
+                          --run_id <random_seed>
 
 # For example, evaluate the trained blocker on the FZ dataset under annotation budget = 500 and random seed = 0.
 python -u eval_blocker.py --dataset FZ --topK 10 --total_budget 500 --run_id 0
@@ -98,7 +120,12 @@ python -u eval_blocker.py --dataset FZ --topK 10 --total_budget 500 --run_id 0
 
 To evaluate the matcher on the processed megallan dataset (excluding the impact of the blocker)
 ```
-python -u test_magellan.py --fp16 --total_budget <annotation budget> --gpu <gpu id> --dataset <dataset> --topK <K, the same hyperparamter as used in the training> --run_id <random_seed>
+python -u test_magellan.py --fp16 \
+                           --total_budget <annotation budget> \
+                           --gpu <gpu id> \
+                           --dataset <dataset> \
+                           --topK <K, the same hyperparamter as used in the training> \
+                           --run_id <random_seed>
 
 # For example, evaluate the trained matcher on the processed Magellan FZ dataset under annotation budget = 500 and random seed = 0.
 python -u test_magellan.py --fp16 --total_budget 500 --gpu 0 --dataset FZ --topK 10 --run_id 0
@@ -112,4 +139,11 @@ GitHub Issues: For more technical inquiries, you can also create a new issue in 
 We will respond to all questions as soon as possible.
 
 ## Acknowledgements
-This repository is developed based on https://github.com/megagonlabs/ditto 
+This repository is developed based on https://github.com/megagonlabs/ditto  
+
+Our implementation of baselines is based on these public repositories:
+* [CollaborEM](https://github.com/ZJU-DAILY/CollaborEM)
+* [DITTO](https://github.com/megagonlabs/ditto)
+* [Avanika, et al.](https://github.com/HazyResearch/fm_data_tasks) 
+
+Thanks for the authors' great contributions!
