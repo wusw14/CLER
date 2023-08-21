@@ -58,7 +58,9 @@ The datasets used in this work can be downloaded from this [link](https://drive.
 
 
 ## Training and Evaluation
-To reproduce the overall performance of our CLER method, run the run.py (including train.py and test_dynamic.py) for training the model and evaluating the overall performance on the test set with five different random seeds.  
+To reproduce the overall performance of our CLER method, run the run.py (including train.py and test_dynamic.py) for training the model and evaluating the overall performance on the test set with five different random seeds (0,1,2,3,4).  
+You can modify the run.py to your own preferable setting. 
+
 run.py only requires the dataset name, gpu id and annotation budget; all other hyperparamters are set to the values we used in our experiments.  
 In our experiments, the budgets are in [500, 1000, 1500, 2000].    
 ```
