@@ -136,7 +136,7 @@ if __name__=="__main__":
     parser.add_argument("--aug_type", type=str, default='random')
     parser.add_argument("--num_iter", type=int, default=5)
     parser.add_argument("--p", type=int, default=10)
-    parser.add_argument("--ckpt_type", type=str, default='best')
+    parser.add_argument("--ckpt_type", type=str, default='last')
     
     hp = parser.parse_args()
     os.environ["CUDA_VISIBLE_DEVICES"] = hp.gpu
@@ -210,7 +210,7 @@ if __name__=="__main__":
         test_idxs = update(df_all, k, test_idxs, gap, min_sim-alpha*np.std(pos_sim), thr)              
         start = end
         end += k
-        if start >= len(topkA[0]):
+        if start >= min(len(topkA[0]), 50):
             break
     
     df_all = df_all.set_index(['ltable_id', 'rtable_id'])
