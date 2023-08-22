@@ -41,7 +41,7 @@ NVIDIA A100 80GB
 Note: the experiments do not require the same hardware environment.
 
 ## Datasets
-we conduct experiments on seven widely adopted public datasets from various domains for ER tasks. 
+We conduct experiments on seven widely adopted public datasets from various domains for ER tasks. 
 These datasets are obtained from the Magellan data repository and the Alaska benchmark. 
     
 | Dataset  | \# entries $D,D'$ | \# matches | (%) matches 
