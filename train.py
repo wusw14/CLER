@@ -17,7 +17,7 @@ os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--path", type=str, default="../data/")
+    parser.add_argument("--path", type=str, default="data/")
     parser.add_argument("--dataset", type=str, default="wdc/shoes")
     parser.add_argument("--run_id", type=int, default=0)
     parser.add_argument("--batch_size", type=int, default=64)
@@ -61,12 +61,12 @@ if __name__=="__main__":
     dataset = dataset_dict.get(dataset, dataset)
 
     if 'wdc' in dataset:
-        hp.path = "../data"
+        hp.path = "data"
     elif 'camera' in dataset or 'monitor' in dataset:
-        hp.path = '../data/Alaska'
+        hp.path = 'data/Alaska'
         hp.dataset = dataset
     else:
-        hp.path = "../data/ER-Magellan"
+        hp.path = "data/ER-Magellan"
         if 'Abt' in dataset:
             hp.dataset = os.path.join("Textual", dataset)
         else:

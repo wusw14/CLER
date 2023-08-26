@@ -256,7 +256,7 @@ def cal_posrate(topkA, gt):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--path", type=str, default="../data/")
+    parser.add_argument("--path", type=str, default="data/")
     parser.add_argument("--dataset", type=str, default="wdc/shoes")
     parser.add_argument("--run_id", type=int, default=0)
     parser.add_argument("--logdir", type=str, default="checkpoints/")
@@ -283,12 +283,12 @@ if __name__ == "__main__":
     dataset = dataset_dict.get(dataset, dataset)
 
     if "wdc" in dataset:
-        path = "../data"
+        path = "data"
     elif "camera" in dataset or "monitor" in dataset:
-        path = "../data/Alaska"
+        path = "data/Alaska"
         dataset = dataset
     else:
-        path = "../data/ER-Magellan"
+        path = "data/ER-Magellan"
         if "Abt" in dataset:
             dataset = os.path.join("Textual", dataset)
         else:
