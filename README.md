@@ -55,6 +55,7 @@ These datasets are obtained from the Magellan data repository and the Alaska ben
 | Monitor (M) | 603, 4323 | 343 | 0.0132 
 
 The datasets used in this work can be downloaded from this [link](https://drive.google.com/drive/folders/1ZnGLUpYFZSC9Ru8HKFCrTthM--1aBqD-?usp=sharing).  
+The downloaded datasets should be stored in the path "data/"
 
 
 ## Training and Evaluation
